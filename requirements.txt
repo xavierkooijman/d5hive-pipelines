@@ -9,5 +9,4 @@ flask
 gunicorn
 geopandas
 shapely
-ipynbname
 pyyaml
