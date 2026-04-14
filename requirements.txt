@@ -1,0 +1,13 @@
+requests
+python-dotenv
+resend
+clts_pcp
+crate
+pymysql
+cryptography
+flask
+gunicorn
+geopandas
+shapely
+ipynbname
+pyyaml

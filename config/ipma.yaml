@@ -1,0 +1,35 @@
+pipeline_name: ipma_ingestion
+
+source:
+  name: ipma
+  type: api
+  endpoint: https://api.ipma.pt/open-data/observation/meteorology/stations/obs-surface.geojson
+  station_id: 1200545
+
+destinations:
+  - type: crate
+    host: https://cmmaia-xavier.aks1.westeurope.azure.cratedb.net:4200
+    database: crate
+    table: weather
+    username: admin
+    password: $CRATEDB_PASSWORD
+
+  - type: mysql
+    host: cmmaia-xavier-xavierkooijman-e96b.f.aivencloud.com
+    port: 23850
+    database: defaultdb
+    table: weather
+    username: avnadmin
+    password: $AIVEN_PASSWORD
+
+save_raw: false
+
+email:
+  send: true
+  from: cmmaiaxavier@gmail.com
+  password: $EMAIL_PASSWORD
+  api_key: $RESEND_API_KEY
+  subject: IPMA Ingestion Pipeline Report
+  recipients:
+    - cmmaiaxavier@gmail.com
+    - xavierkooijman@gmail.com
