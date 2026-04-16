@@ -3,24 +3,36 @@ pipeline_name: ipma_ingestion
 source:
   name: ipma
   type: api
-  endpoint: https://api.ipma.pt/open-data/observation/meteorology/stations/obs-surface.geojson
+  url: https://api.ipma.pt/open-data/observation/meteorology/stations/obs-surface.geojson
   station_id: 1200545
 
 destinations:
   - type: crate
+    name: CrateDB
     host: https://cmmaia-xavier.aks1.westeurope.azure.cratedb.net:4200
     database: crate
-    table: weather
+    table: ipma
     username: admin
     password: $CRATEDB_PASSWORD
 
+  # - type: mysql
+  #    name: Aiven
+  #    host: cmmaia-xavier-xavierkooijman-e96b.f.aivencloud.com
+  #    port: 23850
+  #    database: defaultdb
+  #    table: ipma
+  #    username: avnadmin
+  #    password: $AIVEN_PASSWORD
+
   - type: mysql
-    host: cmmaia-xavier-xavierkooijman-e96b.f.aivencloud.com
-    port: 23850
-    database: defaultdb
-    table: weather
-    username: avnadmin
-    password: $AIVEN_PASSWORD
+    name: TiDB Cloud
+    host: gateway01.eu-central-1.prod.aws.tidbcloud.com
+    port: 4000
+    database: test
+    table: ipma
+    username: 495NGCCkPoossRz.root
+    password: $TIDB_PASSWORD
+    certificate: isrgrootx1.pem
 
 save_raw: false
 

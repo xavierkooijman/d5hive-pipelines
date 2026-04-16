@@ -3,6 +3,7 @@ import yaml
 from dotenv import load_dotenv
 
 from ingestion.pipelines.ipma import run as ipma_run
+from utils.logging import get_logger
 
 load_dotenv()
 
@@ -23,6 +24,8 @@ if __name__ == "__main__":
     config = load_config(config_path)
 
     pipeline_name = config["pipeline_name"]
+
+    logger = get_logger(pipeline_name)
 
     pipeline = PIPELINES[pipeline_name]
 

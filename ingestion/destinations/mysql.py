@@ -15,9 +15,8 @@ def insert_mysql(config, data):
         "database": config["database"],
     }
 
-    # optional SSL config
-    if "ssl" in config:
-        conn_params["ssl_ca"] = config["ssl_path"]
+    if "certificate" in config:
+        conn_params["ssl_ca"] = config["certificate"]
 
     conn = pymysql.connect(**conn_params)
 
