@@ -1,7 +1,3 @@
-import logging
-logger = logging.getLogger(__name__)
-
-
 def detect_environment():
     import os
     import sys
