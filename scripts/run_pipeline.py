@@ -3,13 +3,14 @@ import yaml
 from dotenv import load_dotenv
 
 from ingestion.pipelines.ipma import run as ipma_run
+from ingestion.pipelines.open_meteo import run as open_meteo_run
 from utils.logging import get_logger
 
 load_dotenv()
 
-
 PIPELINES = {
     "ipma_ingestion": ipma_run,
+    "open_meteo_ingestion": open_meteo_run
 }
 
 
