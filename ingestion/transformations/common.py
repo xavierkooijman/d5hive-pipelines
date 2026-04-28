@@ -1,5 +1,7 @@
+
+
 def ms_to_kmh(value):
-    return value * 3.6
+    return value * 3.6 if value is not None else None
 
 
 def normalize_timestamp(timestamp):
