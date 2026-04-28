@@ -1,0 +1,50 @@
+pipeline_name: openweathermap_ingestion
+source:
+  name: openweathermap
+  type: api
+  url: https://api.openweathermap.org/data/2.5/weather
+  parameters:
+    lat: 41.2357
+    lon: -8.6199
+    units: metric
+    appid: $OPENWEATHERMAP_API_KEY
+
+destinations:
+  - type: crate
+    name: CrateDB
+    host: https://cmmaia-xavier.aks1.westeurope.azure.cratedb.net:4200
+    database: crate
+    table: openweathermap
+    username: admin
+    password: $CRATEDB_PASSWORD
+
+  # - type: mysql
+  #    name: Aiven
+  #    host: cmmaia-xavier-xavierkooijman-e96b.f.aivencloud.com
+  #    port: 23850
+  #    database: defaultdb
+  #    table: openweathermap
+  #    username: avnadmin
+  #    password: $AIVEN_PASSWORD
+
+  - type: mysql
+    name: TiDB Cloud
+    host: gateway01.eu-central-1.prod.aws.tidbcloud.com
+    port: 4000
+    database: test
+    table: openweathermap
+    username: 495NGCCkPoossRz.root
+    password: $TIDB_PASSWORD
+    certificate: isrgrootx1.pem
+
+save_raw: false
+
+email:
+  send: true
+  from: cmmaiaxavier@gmail.com
+  password: $EMAIL_PASSWORD
+  api_key: $RESEND_API_KEY
+  subject: Openweathermap Ingestion Pipeline Report
+  recipients:
+    - cmmaiaxavier@gmail.com
+    - xavierkooijman@gmail.com
