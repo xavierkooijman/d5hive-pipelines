@@ -7,3 +7,5 @@ secrets/
 *.geojson
 *.json
 *.pem
+
+aiven_connection.py

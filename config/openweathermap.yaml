@@ -18,14 +18,14 @@ destinations:
     username: admin
     password: $CRATEDB_PASSWORD
 
-  # - type: mysql
-  #    name: Aiven
-  #    host: cmmaia-xavier-xavierkooijman-e96b.f.aivencloud.com
-  #    port: 23850
-  #    database: defaultdb
-  #    table: openweathermap
-  #    username: avnadmin
-  #    password: $AIVEN_PASSWORD
+  - type: mysql
+    name: Aiven
+    host: cmmaia-xavier-xavierkooijman-e96b.f.aivencloud.com
+    port: 23850
+    database: defaultdb
+    table: openweathermap
+    username: avnadmin
+    password: $AIVEN_PASSWORD
 
   - type: mysql
     name: TiDB Cloud

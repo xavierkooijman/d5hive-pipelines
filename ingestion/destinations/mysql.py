@@ -1,5 +1,6 @@
 import pymysql
 from utils.destinations_registry import register_destination
+import clts_pcp as clts
 
 
 @register_destination("mysql")
@@ -37,6 +38,8 @@ def insert_mysql(config, data):
         for row in data
     ]
 
+    print(
+        f"Inserting {len(values)} rows into MySQL table '{table}' at {config['host']}:{config['port']}")
     cursor.executemany(query, values)
 
     conn.commit()
