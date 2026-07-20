@@ -16,3 +16,4 @@ opentelemetry-sdk
 opentelemetry-exporter-otlp-proto-http
 opentelemetry-api
 pydantic
+boto3

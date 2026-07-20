@@ -19,7 +19,12 @@ destinations:
     username: postgres
     password: $MOTHERDUCK_TOKEN
 
-save_raw: false
+dead_letter_storage:
+  save_failed_records: true
+  bucket: $B2_BUCKET_NAME
+  endpoint: $B2_ENDPOINT
+  access_key: $B2_APPLICATION_KEY
+  secret_access_key: $B2_KEY
 
 email:
   send: true

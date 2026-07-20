@@ -6,11 +6,11 @@ import yaml
 from utils.logger import get_logger
 from ingestion.pipelines.traffic_flow import TrafficFlowPipeline
 
+with open("pipelines_config/traffic_flow.yaml", "r") as f:
+    config = yaml.safe_load(f)
+
 
 def run_traffic_flow():
-    with open("pipelines_config/traffic_flow.yaml", "r") as f:
-        config = yaml.safe_load(f)
-
     get_logger()
     TrafficFlowPipeline(config).run()
 

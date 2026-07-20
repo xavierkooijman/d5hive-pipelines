@@ -1,6 +1,7 @@
 from ingestion.sources.api import APIClient
 from utils.connectors import run_inserts
 from utils.tracer import get_tracer
+from utils.common import save_raw_payload
 import logging
 from abc import ABC, abstractmethod
 from opentelemetry import trace
@@ -15,7 +16,8 @@ class BaseETLPipeline(ABC):
 
     def extract_data(self):
         api_client = APIClient(self.config["source"]["base_url"])
-        return api_client.get(self.config["source"]["endpoint"], params=self.config["source"].get("parameters", {}), headers=self.config["source"].get("headers", {}))
+        return api_client.get(self.config["source"]["endpoint"], params=self.config["source"].get(
+            "parameters", {}), headers=self.config["source"].get("headers", {}))
 
     @abstractmethod
     def validate_raw_schema(self, data):
@@ -40,6 +42,7 @@ class BaseETLPipeline(ABC):
             try:
                 with self.tracer.start_as_current_span("extract"):
                     data = self.extract_data()
+                    save_raw_payload(self.config.get("pipeline_name"), data)
 
                 with self.tracer.start_as_current_span("validate raw schema"):
                     self.logger.info("Validating raw data schema")
